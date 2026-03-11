@@ -43,16 +43,12 @@
         }
         
         .pulse-anim { animation: pulse 2s infinite alternate; }
-
         .left-side .t-9aso { color: #034694; text-shadow: 0 0 15px #034694; }
         .left-side .t-hezzo { color: #00d4ff; text-shadow: 0 0 15px #00d4ff; }
         .chelsea-glow { filter: drop-shadow(0 0 15px #034694); cursor: pointer; transition: 0.3s; }
-        .chelsea-glow:hover { transform: rotate(-10deg) scale(1.1); }
-
         .right-side .t-9aso { color: #FEBE10; text-shadow: 0 0 15px #FEBE10; }
         .right-side .t-hezzo { color: #ffffff; text-shadow: 0 0 15px #FEBE10; }
         .madrid-glow { filter: drop-shadow(0 0 15px #FEBE10); cursor: pointer; transition: 0.3s; }
-        .madrid-glow:hover { transform: scale(1.1); }
 
         .logo { width: 75px; height: auto; }
 
@@ -61,30 +57,13 @@
             to { opacity: 1; transform: scale(1.02); }
         }
 
-        .party-mode {
-            animation: jitter 0.1s infinite, rainbow 0.5s infinite !important;
-        }
-
-        @keyframes jitter {
-            0% { transform: translate(0,0) rotate(0); }
-            25% { transform: translate(5px, -5px) rotate(5deg); }
-            50% { transform: translate(-5px, 5px) rotate(-5deg); }
-            75% { transform: translate(5px, 5px) rotate(2deg); }
-            100% { transform: translate(0,0) rotate(0); }
-        }
-
-        @keyframes rainbow {
-            0% { color: #ff0000; text-shadow: 0 0 20px #ff0000; }
-            20% { color: #ff00ff; text-shadow: 0 0 20px #ff00ff; }
-            40% { color: #0000ff; text-shadow: 0 0 20px #0000ff; }
-            60% { color: #00ffff; text-shadow: 0 0 20px #00ffff; }
-            80% { color: #00ff00; text-shadow: 0 0 20px #00ff00; }
-            100% { color: #ffff00; text-shadow: 0 0 20px #ffff00; }
-        }
+        .party-mode { animation: jitter 0.1s infinite, rainbow 0.5s infinite !important; }
+        @keyframes jitter { 0% {transform:translate(0,0)} 25% {transform:translate(5px,-5px)} 50% {transform:translate(-5px,5px)} }
+        @keyframes rainbow { 0% {color:#ff0000} 50% {color:#00ff00} 100% {color:#ffff00} }
 
         .container {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* FORCES VERTICAL STACK */
             gap: 4px;
             width: 80%; 
             height: 100%;
@@ -95,7 +74,7 @@
             display: flex;
             flex-direction: row;
             background: #111;
-            height: 48.5vh; 
+            height: 48.5vh; /* Perfect height for 1080p stacking */
             width: 100%;
             border: 1px solid #222;
         }
@@ -103,7 +82,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             padding: 0 10px;
             background: #0a0a0a;
             border-right: 1px solid #333;
@@ -117,10 +96,7 @@
             transition: 0.2s;
         }
         .active-btn { background: #222 !important; color: white !important; }
-        
-        .audio-btn { border-color: #444; margin-top: 5px; color: #666; }
         .audio-active { background: #00ff00 !important; color: #000 !important; border-color: #00ff00 !important; }
-        
         .label { font-size: 9px; color: #333; text-align: center; }
         hr { width: 100%; border: 0; border-top: 1px solid #222; margin: 2px 0; }
     </style>
@@ -145,11 +121,13 @@
                 <div class="label">S1</div>
                 <button id="btn1-p" class="active-btn" onclick="swap('f1', 'P1', 'btn1-p', 'btn1-b')">V1</button>
                 <button id="btn1-b" onclick="swap('f1', 'B1', 'btn1-b', 'btn1-p')">V2</button>
+                <button onclick="document.getElementById('f1').src+=''">REF</button>
                 <hr>
-                <button id="aud1" class="audio-btn" onclick="focusAudio('f1', 'f2', 'aud1', 'aud2')">LISTEN</button>
+                <button id="aud1" onclick="focusAudio('f1', 'f2', 'aud1', 'aud2')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f1" src="https://livetv.aflam4you.net/embed.php?vid=68" allowfullscreen></iframe>
+                <iframe id="f1" src="https://livetv.aflam4you.net/embed.php?vid=68" 
+                        sandbox="allow-forms allow-scripts allow-same-origin" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -158,11 +136,13 @@
                 <div class="label">S2</div>
                 <button id="btn2-p" class="active-btn" onclick="swap('f2', 'P2', 'btn2-p', 'btn2-b')">V1</button>
                 <button id="btn2-b" onclick="swap('f2', 'B2', 'btn2-b', 'btn2-p')">V2</button>
+                <button onclick="document.getElementById('f2').src+=''">REF</button>
                 <hr>
-                <button id="aud2" class="audio-btn" onclick="focusAudio('f2', 'f1', 'aud2', 'aud1')">LISTEN</button>
+                <button id="aud2" onclick="focusAudio('f2', 'f1', 'aud2', 'aud1')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f2" src="https://livetv.aflam4you.net/embed.php?vid=2" allowfullscreen></iframe>
+                <iframe id="f2" src="https://livetv.aflam4you.net/embed.php?vid=2" 
+                        sandbox="allow-forms allow-scripts allow-same-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>
