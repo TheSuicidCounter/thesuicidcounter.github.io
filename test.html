@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            background-color: #000; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Arial Black', sans-serif; 
+            overflow: hidden; 
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Sidebars */
+        .sidebar-deco {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            user-select: none;
+            z-index: 5;
+        }
+        .left-side { left: 5px; }
+        .right-side { right: 5px; }
+
+        /* Big Vertical Text */
+        .text-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.1;
+            transition: 0.3s;
+        }
+        
+        /* Normal State Animations */
+        .pulse-anim { animation: pulse 2s infinite alternate; }
+
+        /* Left Colors: Chelsea Blue */
+        .left-side .t-9aso { color: #034694; text-shadow: 0 0 15px #034694; }
+        .left-side .t-hezzo { color: #00d4ff; text-shadow: 0 0 15px #00d4ff; }
+        .chelsea-glow { filter: drop-shadow(0 0 15px #034694); cursor: pointer; transition: 0.3s; }
+        .chelsea-glow:hover { transform: rotate(-10deg) scale(1.1); }
+
+        /* Right Colors: Madrid Gold */
+        .right-side .t-9aso { color: #FEBE10; text-shadow: 0 0 15px #FEBE10; }
+        .right-side .t-hezzo { color: #ffffff; text-shadow: 0 0 15px #FEBE10; }
+        .madrid-glow { filter: drop-shadow(0 0 15px #FEBE10); cursor: pointer; transition: 0.3s; }
+        .madrid-glow:hover { transform: scale(1.1); }
+
+        .logo { width: 75px; height: auto; }
+
+        /* --- Animations --- */
+        @keyframes pulse {
+            from { opacity: 0.5; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* The Funny "Party Mode" Animation */
+        .party-mode {
+            animation: jitter 0.1s infinite, rainbow 0.5s infinite !important;
+        }
+
+        @keyframes jitter {
+            0% { transform: translate(0,0) rotate(0); }
+            25% { transform: translate(5px, -5px) rotate(5deg); }
+            50% { transform: translate(-5px, 5px) rotate(-5deg); }
+            75% { transform: translate(5px, 5px) rotate(2deg); }
+            100% { transform: translate(0,0) rotate(0); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; text-shadow: 0 0 20px #ff0000; }
+            20% { color: #ff00ff; text-shadow: 0 0 20px #ff00ff; }
+            40% { color: #0000ff; text-shadow: 0 0 20px #0000ff; }
+            60% { color: #00ffff; text-shadow: 0 0 20px #00ffff; }
+            80% { color: #00ff00; text-shadow: 0 0 20px #00ff00; }
+            100% { color: #ffff00; text-shadow: 0 0 20px #ffff00; }
+        }
+
+        /* Layout Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 80%; 
+            height: 100%;
+            justify-content: center;
+            z-index: 10;
+        }
+        .stream-entry {
+            display: flex;
+            flex-direction: row;
+            background: #111;
+            height: 48.5vh; 
+            width: 100%;
+            border: 1px solid #222;
+        }
+        .sidebar-ctrl {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            padding: 0 10px;
+            background: #0a0a0a;
+            border-right: 1px solid #333;
+        }
+        .video-wrapper { flex-grow: 1; height: 100%; background: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
+        button {
+            background: #111; color: #444; border: 1px solid #333;
+            padding: 6px; cursor: pointer; border-radius: 3px; font-size: 10px; font-weight: bold;
+        }
+        .active-btn { background: #222 !important; color: white !important; }
+        .label { font-size: 9px; color: #333; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-deco left-side">
+        <div class="text-block t-9aso pulse-anim"><span>9</span><span>A</span><span>S</span><span>O</span></div>
+        <img class="logo chelsea-glow" src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea" onclick="triggerParty()">
+        <div class="text-block t-hezzo pulse-anim"><span>H</span><span>E</span><span>Z</span><span>Z</span><span>O</span></div>
+    </div>
+
+    <div class="sidebar-deco right-side">
+        <div class="text-block t-9aso pulse-anim"><span>9</span><span>A</span><span>S</span><span>O</span></div>
+        <img class="logo madrid-glow" src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid" onclick="toggleFullScreen()">
+        <div class="text-block t-hezzo pulse-anim"><span>H</span><span>E</span><span>Z</span><span>Z</span><span>O</span></div>
+    </div>
+
+    <div class="container">
+        <div class="stream-entry">
+            <div class="sidebar-ctrl">
+                <div class="label">S1</div>
+                <button id="btn1-p" class="active-btn" onclick="swap('f1', 'P1', 'btn1-p', 'btn1-b')">V1</button>
+                <button id="btn1-b" onclick="swap('f1', 'B1', 'btn1-b', 'btn1-p')">V2</button>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="f1" src="https://bintv.pages.dev/?id=https://hmembeds.one/embed/event-150e972425&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvZXZlbnQtMTUwZTk3MjQyNQ==" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="stream-entry">
+            <div class="sidebar-ctrl">
+                <div class="label">S2</div>
+                <button id="btn2-p" class="active-btn" onclick="swap('f2', 'P2', 'btn2-p', 'btn2-b')">V1</button>
+                <button id="btn2-b" onclick="swap('f2', 'B2', 'btn2-b', 'btn2-p')">V2</button>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="f2" src="https://bintv.pages.dev/?id=ge_atl-madrid-tottenham-live-streaming-515382912/1&data=aHR0cHM6Ly9lbWJlZHNwb3J0cy50b3AvZW1iZWQvZGVsdGEvbGl2ZV91ZWZhLWNoYW1waW9ucy1sZWFndWUta25vY2tvdXQtc3RhZ2VfYXRsLW1hZHJpZC10b3R0ZW5oYW0tbGl2ZS1zdHJlYW1pbmctNTE1MzgyOTEyLzE=" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const links = {
+        'P1': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/event-150e972425&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvZXZlbnQtMTUwZTk3MjQyNQ==',
+        'B1': 'PASTE_BACKUP_1_HERE',
+        'P2': 'https://bintv.pages.dev/?id=ge_atl-madrid-tottenham-live-streaming-515382912/1&data=aHR0cHM6Ly9lbWJlZHNwb3J0cy50b3AvZW1iZWQvZGVsdGEvbGl2ZV91ZWZhLWNoYW1waW9ucy1sZWFndWUta25vY2tvdXQtc3RhZ2VfYXRsLW1hZHJpZC10b3R0ZW5oYW0tbGl2ZS1zdHJlYW1pbmctNTE1MzgyOTEyLzE=',
+        'B2': 'PASTE_BACKUP_2_HERE'
+    };
+
+    function swap(frameId, key, activeId, inactiveId) {
+        const url = links[key];
+        if(url && !url.includes('PASTE_BACKUP')) {
+            document.getElementById(frameId).src = url;
+            document.getElementById(activeId).classList.add('active-btn');
+            document.getElementById(inactiveId).classList.remove('active-btn');
+        }
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function triggerParty() {
+        const texts = document.querySelectorAll('.text-block');
+        texts.forEach(t => t.classList.add('party-mode'));
+        
+        // Stops the party after 3 seconds
+        setTimeout(() => {
+            texts.forEach(t => t.classList.remove('party-mode'));
+        }, 3000);
+    }
+</script>
+</body>
+</html>
