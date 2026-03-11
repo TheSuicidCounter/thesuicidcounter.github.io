@@ -63,7 +63,7 @@
 
         .container {
             display: flex;
-            flex-direction: column; /* FORCES VERTICAL STACK */
+            flex-direction: column; 
             gap: 4px;
             width: 80%; 
             height: 100%;
@@ -74,7 +74,7 @@
             display: flex;
             flex-direction: row;
             background: #111;
-            height: 48.5vh; /* Perfect height for 1080p stacking */
+            height: 48.5vh; 
             width: 100%;
             border: 1px solid #222;
         }
@@ -126,8 +126,7 @@
                 <button id="aud1" onclick="focusAudio('f1', 'f2', 'aud1', 'aud2')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f1" src="https://livetv.aflam4you.net/embed.php?vid=68" 
-                        sandbox="allow-forms allow-scripts allow-same-origin" allowfullscreen></iframe>
+                <iframe id="f1" src="https://livetv.aflam4you.net/embed.php?vid=68" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -141,8 +140,7 @@
                 <button id="aud2" onclick="focusAudio('f2', 'f1', 'aud2', 'aud1')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f2" src="https://livetv.aflam4you.net/embed.php?vid=2" 
-                        sandbox="allow-forms allow-scripts allow-same-origin" allowfullscreen></iframe>
+                <iframe id="f2" src="https://livetv.aflam4you.net/embed.php?vid=2" allowfullscreen></iframe>
             </div>
         </div>
     </div>
