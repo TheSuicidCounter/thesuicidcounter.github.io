@@ -103,19 +103,26 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 5px;
+            gap: 6px;
             padding: 0 10px;
             background: #0a0a0a;
             border-right: 1px solid #333;
         }
         .video-wrapper { flex-grow: 1; height: 100%; background: #000; }
         iframe { width: 100%; height: 100%; border: none; }
+        
         button {
             background: #111; color: #444; border: 1px solid #333;
             padding: 6px; cursor: pointer; border-radius: 3px; font-size: 10px; font-weight: bold;
+            transition: 0.2s;
         }
         .active-btn { background: #222 !important; color: white !important; }
+        
+        .audio-btn { border-color: #444; margin-top: 5px; color: #666; }
+        .audio-active { background: #00ff00 !important; color: #000 !important; border-color: #00ff00 !important; }
+        
         .label { font-size: 9px; color: #333; text-align: center; }
+        hr { width: 100%; border: 0; border-top: 1px solid #222; margin: 2px 0; }
     </style>
 </head>
 <body>
@@ -138,9 +145,11 @@
                 <div class="label">S1</div>
                 <button id="btn1-p" class="active-btn" onclick="swap('f1', 'P1', 'btn1-p', 'btn1-b')">V1</button>
                 <button id="btn1-b" onclick="swap('f1', 'B1', 'btn1-b', 'btn1-p')">V2</button>
+                <hr>
+                <button id="aud1" class="audio-btn" onclick="focusAudio('f1', 'f2', 'aud1', 'aud2')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f1" src="https://bintv.pages.dev/?id=https://hmembeds.one/embed/event-150e972425&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvZXZlbnQtMTUwZTk3MjQyNQ==" allowfullscreen></iframe>
+                <iframe id="f1" src="https://livetv.aflam4you.net/embed.php?vid=68" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -149,47 +158,49 @@
                 <div class="label">S2</div>
                 <button id="btn2-p" class="active-btn" onclick="swap('f2', 'P2', 'btn2-p', 'btn2-b')">V1</button>
                 <button id="btn2-b" onclick="swap('f2', 'B2', 'btn2-b', 'btn2-p')">V2</button>
+                <hr>
+                <button id="aud2" class="audio-btn" onclick="focusAudio('f2', 'f1', 'aud2', 'aud1')">LISTEN</button>
             </div>
             <div class="video-wrapper">
-                <iframe id="f2" src="https://bintv.pages.dev/?id=ge_atl-madrid-tottenham-live-streaming-515382912/1&data=aHR0cHM6Ly9lbWJlZHNwb3J0cy50b3AvZW1iZWQvZGVsdGEvbGl2ZV91ZWZhLWNoYW1waW9ucy1sZWFndWUta25vY2tvdXQtc3RhZ2VfYXRsLW1hZHJpZC10b3R0ZW5oYW0tbGl2ZS1zdHJlYW1pbmctNTE1MzgyOTEyLzE=" allowfullscreen></iframe>
+                <iframe id="f2" src="https://livetv.aflam4you.net/embed.php?vid=2" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
 <script>
     const links = {
-        'P1': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/event-150e972425&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvZXZlbnQtMTUwZTk3MjQyNQ==',
+        'P1': 'https://livetv.aflam4you.net/embed.php?vid=68',
         'B1': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/tnt-sports-2&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvdG50LXNwb3J0cy0y',
-        'P2': 'https://bintv.pages.dev/?id=ge_atl-madrid-tottenham-live-streaming-515382912/1&data=aHR0cHM6Ly9lbWJlZHNwb3J0cy50b3AvZW1iZWQvZGVsdGEvbGl2ZV91ZWZhLWNoYW1waW9ucy1sZWFndWUta25vY2tvdXQtc3RhZ2VfYXRsLW1hZHJpZC10b3R0ZW5oYW0tbGl2ZS1zdHJlYW1pbmctNTE1MzgyOTEyLzE=',
+        'P2': 'https://livetv.aflam4you.net/embed.php?vid=2',
         'B2': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/tnt-sports-1&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvdG50LXNwb3J0cy0x'
     };
 
     function swap(frameId, key, activeId, inactiveId) {
         const url = links[key];
-        if(url && !url.includes('PASTE_BACKUP')) {
+        if(url) {
             document.getElementById(frameId).src = url;
             document.getElementById(activeId).classList.add('active-btn');
             document.getElementById(inactiveId).classList.remove('active-btn');
         }
     }
 
+    function focusAudio(activeFrameId, silentFrameId, activeBtnId, silentBtnId) {
+        const silentFrame = document.getElementById(silentFrameId);
+        silentFrame.src = silentFrame.src; 
+        document.getElementById(activeBtnId).classList.add('audio-active');
+        document.getElementById(silentBtnId).classList.remove('audio-active');
+    }
+
     function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
     }
 
     function triggerParty() {
         const texts = document.querySelectorAll('.text-block');
         texts.forEach(t => t.classList.add('party-mode'));
-        
-        setTimeout(() => {
-            texts.forEach(t => t.classList.remove('party-mode'));
-        }, 3000);
+        setTimeout(() => texts.forEach(t => t.classList.remove('party-mode')), 3000);
     }
 </script>
 </body>
 </html>
-
