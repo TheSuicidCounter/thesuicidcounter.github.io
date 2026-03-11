@@ -15,7 +15,6 @@
             justify-content: center;
         }
 
-        /* Sidebars */
         .sidebar-deco {
             position: fixed;
             top: 0;
@@ -32,7 +31,6 @@
         .left-side { left: 5px; }
         .right-side { right: 5px; }
 
-        /* Big Vertical Text */
         .text-block {
             display: flex;
             flex-direction: column;
@@ -43,16 +41,13 @@
             transition: 0.3s;
         }
         
-        /* Normal State Animations */
         .pulse-anim { animation: pulse 2s infinite alternate; }
 
-        /* Left Colors: Chelsea Blue */
         .left-side .t-9aso { color: #034694; text-shadow: 0 0 15px #034694; }
         .left-side .t-hezzo { color: #00d4ff; text-shadow: 0 0 15px #00d4ff; }
         .chelsea-glow { filter: drop-shadow(0 0 15px #034694); cursor: pointer; transition: 0.3s; }
         .chelsea-glow:hover { transform: rotate(-10deg) scale(1.1); }
 
-        /* Right Colors: Madrid Gold */
         .right-side .t-9aso { color: #FEBE10; text-shadow: 0 0 15px #FEBE10; }
         .right-side .t-hezzo { color: #ffffff; text-shadow: 0 0 15px #FEBE10; }
         .madrid-glow { filter: drop-shadow(0 0 15px #FEBE10); cursor: pointer; transition: 0.3s; }
@@ -60,13 +55,11 @@
 
         .logo { width: 75px; height: auto; }
 
-        /* --- Animations --- */
         @keyframes pulse {
             from { opacity: 0.5; transform: scale(0.98); }
             to { opacity: 1; transform: scale(1.02); }
         }
 
-        /* The Funny "Party Mode" Animation */
         .party-mode {
             animation: jitter 0.1s infinite, rainbow 0.5s infinite !important;
         }
@@ -88,7 +81,6 @@
             100% { color: #ffff00; text-shadow: 0 0 20px #ffff00; }
         }
 
-        /* Layout Container */
         .container {
             display: flex;
             flex-direction: column;
@@ -166,9 +158,9 @@
 <script>
     const links = {
         'P1': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/event-150e972425&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvZXZlbnQtMTUwZTk3MjQyNQ==',
-        'B1': 'PASTE_BACKUP_1_HERE',
+        'B1': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/tnt-sports-2&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvdG50LXNwb3J0cy0y',
         'P2': 'https://bintv.pages.dev/?id=ge_atl-madrid-tottenham-live-streaming-515382912/1&data=aHR0cHM6Ly9lbWJlZHNwb3J0cy50b3AvZW1iZWQvZGVsdGEvbGl2ZV91ZWZhLWNoYW1waW9ucy1sZWFndWUta25vY2tvdXQtc3RhZ2VfYXRsLW1hZHJpZC10b3R0ZW5oYW0tbGl2ZS1zdHJlYW1pbmctNTE1MzgyOTEyLzE=',
-        'B2': 'PASTE_BACKUP_2_HERE'
+        'B2': 'https://bintv.pages.dev/?id=https://hmembeds.one/embed/tnt-sports-1&data=aHR0cHM6Ly9obWVtYmVkcy5vbmUvZW1iZWQvdG50LXNwb3J0cy0x'
     };
 
     function swap(frameId, key, activeId, inactiveId) {
@@ -192,7 +184,6 @@
         const texts = document.querySelectorAll('.text-block');
         texts.forEach(t => t.classList.add('party-mode'));
         
-        // Stops the party after 3 seconds
         setTimeout(() => {
             texts.forEach(t => t.classList.remove('party-mode'));
         }, 3000);
